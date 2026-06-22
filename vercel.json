@@ -1,13 +1,20 @@
 {
-  "version": 2,
-  "functions": {
-    "api/stream.py": {
-      "maxDuration": 60,
-      "memory": 1024
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python"
     }
-  },
-  "rewrites": [
-    { "source": "/stream", "destination": "/api/stream" },
-    { "source": "/health", "destination": "/api/health" }
-  ]
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "main.py"
+    }
+  ],
+  "functions": {
+    "main.py": {
+      "maxDuration": 60
+    }
+  }
 }
